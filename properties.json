@@ -6,20 +6,20 @@
         "map_link": "https://maps.app.goo.gl/QMxzpk23s1prTR"
     },
     {
-        "name": "New Property",
-        "address": "Unknown Address",
+        "name": "plot",
+        "address": "op",
         "image": "https://raw.githubusercontent.com/hackerjk1234/website-real/main/images/4.jpg",
         "map_link": "https://maps.google.com"
     },
     {
-        "name": "New Property",
-        "address": "Unknown Address",
+        "name": "plot2",
+        "address": "op ,1234",
         "image": "https://raw.githubusercontent.com/hackerjk1234/website-real/main/images/2.jpg",
         "map_link": "https://maps.google.com"
     },
     {
-        "name": "New Property",
-        "address": "Unknown Address",
+        "name": "land5",
+        "address": "main street 12345",
         "image": "https://raw.githubusercontent.com/hackerjk1234/website-real/main/images/3.jpg",
         "map_link": "https://maps.google.com"
     }
