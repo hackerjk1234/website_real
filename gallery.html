@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Property Gallery</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .property {
+            margin: 15px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            text-align: left;
+        }
+        img {
+            width: 100%;
+            height: auto;
+        }
+        .location-btn {
+            display: block;
+            margin-top: 5px;
+            text-decoration: none;
+            color: white;
+            background: blue;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Property Gallery</h1>
+    <div class="gallery" id="gallery-container">
+        <!-- Properties will be loaded here dynamically -->
+    </div>
+    <script>
+        fetch('properties.json')
+            .then(response => response.json())
+            .then(data => {
+                const gallery = document.getElementById('gallery-container');
+                data.forEach(property => {
+                    const div = document.createElement('div');
+                    div.classList.add('property');
+                    div.innerHTML = `
+                        <img src="${property.image}" alt="${property.name}">
+                        <h3>${property.name}</h3>
+                        <p>${property.address}</p>
+                        <a class="location-btn" href="${property.map_link}" target="_blank">View on Map</a>
+                    `;
+                    gallery.appendChild(div);
+                });
+            });
+    </script>
+</body>
+</html>
