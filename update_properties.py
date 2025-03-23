@@ -2,7 +2,7 @@ import os
 import json
 
 # 🏡 GitHub repo details
-GITHUB_USERNAME = "your-username"
+GITHUB_USERNAME = "hackerjk1234"
 REPO_NAME = "website-real"  # Your repo name
 IMAGE_FOLDER = "images/"
 PROPERTIES_FILE = "properties.json"
