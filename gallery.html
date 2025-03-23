@@ -62,7 +62,7 @@
             line-height: 1.4;
         }
 
-        .location-btn {
+        .location-btn, .back-btn {
             display: inline-block;
             margin-top: 10px;
             padding: 8px 15px;
@@ -73,13 +73,20 @@
             font-weight: bold;
         }
 
-        .location-btn:hover {
+        .location-btn:hover, .back-btn:hover {
             background-color: #0056b3;
+        }
+
+        .back-container {
+            margin: 20px;
         }
     </style>
 </head>
 <body>
     <h1>Property Gallery</h1>
+    <div class="back-container">
+        <a class="back-btn" href="index.html">&#8592; Back to Home</a>
+    </div>
     <div class="gallery" id="gallery-container">
         <!-- Properties will be loaded here dynamically -->
     </div>
