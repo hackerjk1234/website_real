@@ -20,8 +20,9 @@ exports.handler = async (event) => {
     const form = new formidable.IncomingForm({ maxFileSize: 2 * 1024 * 1024 }); // 2MB limit
 
     return new Promise((resolve, reject) => {
-        form.parse(event, async (err, fields, files) => {
+        form.parse(event.body, (err, fields, files) => {
             if (err) {
+                console.error("Form parse error:", err);
                 return resolve({ statusCode: 400, body: JSON.stringify({ error: "File Upload Error" }) });
             }
 
