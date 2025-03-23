@@ -41,10 +41,9 @@
     <div class="gallery" id="gallery-container">
         <!-- Properties will be loaded here dynamically -->
     </div>
-
     <script>
-        // Fetch the properties.json from the correct URL (ensure the path is correct)
-        fetch('properties.json')  // If hosted on GitHub, use the raw URL for the file
+        // Correct URL for the properties.json hosted on GitHub
+        fetch('https://raw.githubusercontent.com/yhackerjk1234/website_real/main/properties.json') 
             .then(response => response.json())
             .then(data => {
                 const gallery = document.getElementById('gallery-container');
