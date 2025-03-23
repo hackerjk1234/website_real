@@ -41,8 +41,10 @@
     <div class="gallery" id="gallery-container">
         <!-- Properties will be loaded here dynamically -->
     </div>
+
     <script>
-        fetch('properties.json')
+        // Fetch the properties.json from the correct URL (ensure the path is correct)
+        fetch('properties.json')  // If hosted on GitHub, use the raw URL for the file
             .then(response => response.json())
             .then(data => {
                 const gallery = document.getElementById('gallery-container');
@@ -57,7 +59,8 @@
                     `;
                     gallery.appendChild(div);
                 });
-            });
+            })
+            .catch(error => console.error('Error loading properties:', error));
     </script>
 </body>
 </html>
