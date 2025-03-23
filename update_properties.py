@@ -2,40 +2,67 @@ import os
 import json
 
 # 🏡 GitHub repo details
-GITHUB_USERNAME = "hackerjk1234"  # Your GitHub username
-REPO_NAME = "website_real"  # Your repo name
+GITHUB_USERNAME = "hackerjk1234"
+REPO_NAME = "website-real"  # Your repo name
 IMAGE_FOLDER = "images/"
 PROPERTIES_FILE = "properties.json"
-PROPERTY_DETAILS_FILE = "property_details.txt"  # File to store property details
 
 def load_property_details():
-    """Load property details from the text file"""
-    property_details = []
-    if os.path.exists(PROPERTY_DETAILS_FILE):
-        with open(PROPERTY_DETAILS_FILE, "r") as file:
-            for line in file.readlines():
-                parts = line.strip().split(":")
-                if len(parts) == 2:
-                    image_file, address = parts
-                    # Splitting the address into name and address part
-                    name, address = address.split(",", 1)
-                    property_details.append({
-                        "name": name.strip(),
-                        "address": address.strip(),
-                        "image": f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{REPO_NAME}/main/{IMAGE_FOLDER}{image_file.strip()}",
-                        "map_link": f"https://maps.google.com/?q={address.strip()}"
+    """Load property details from the text file."""
+    properties = []
+    with open('property_details.txt', 'r') as file:
+        for line in file:
+            if line.strip():
+                parts = line.split(":")
+                if len(parts) == 2:  # Ensure there's only one ':' per line
+                    image, details = parts
+                    details = details.strip()
+                    name, address = map(str.strip, details.split(","))
+                    properties.append({
+                        "image": image.strip(),
+                        "name": name,
+                        "address": address,
+                        "map_link": f"https://maps.google.com/?q={address.replace(' ', '+')}"
                     })
-    return property_details
+                else:
+                    print(f"Skipping invalid line: {line.strip()}")
+    return properties
 
 def update_properties():
     """Automatically updates properties.json with new images"""
-    properties = load_property_details()
+    properties = []
+    
+    # Load existing JSON data if available
+    if os.path.exists(PROPERTIES_FILE):
+        with open(PROPERTIES_FILE, "r") as f:
+            properties = json.load(f)
 
-    # Save updated data to properties.json
+    # Extract existing image names to avoid duplicates
+    existing_images = {prop["image"].split("/")[-1] for prop in properties}
+
+    # Load new property details
+    new_properties = load_property_details()
+
+    print(f"Loaded {len(new_properties)} properties from the text file.")  # Debug line
+
+    # Check all images in the folder
+    for property_data in new_properties:
+        image = property_data["image"]
+        if image not in existing_images:
+            image_url = f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{REPO_NAME}/main/{IMAGE_FOLDER}{image}"
+            new_entry = {
+                "name": property_data["name"],
+                "address": property_data["address"],
+                "image": image_url,
+                "map_link": property_data["map_link"]
+            }
+            properties.append(new_entry)
+
+    # Save updated data
     with open(PROPERTIES_FILE, "w") as f:
         json.dump(properties, f, indent=4)
 
-    print("✅ properties.json updated successfully!")
+    print(f"✅ properties.json updated successfully with {len(properties)} properties.")
 
 if __name__ == "__main__":
     update_properties()
