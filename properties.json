@@ -4,6 +4,23 @@
         "address": "123 Beverly Hills, LA",
         "image": "https://raw.githubusercontent.com/hackerjk1234/website_real/main/images/1.jpg",
         "map_link": "https://maps.app.goo.gl/QMxzpk23s1prTR"
+    },
+    {
+        "name": "New Property",
+        "address": "Unknown Address",
+        "image": "https://raw.githubusercontent.com/your-username/website-real/main/images/2.jpg",
+        "map_link": "https://maps.google.com"
+    },
+    {
+        "name": "New Property",
+        "address": "Unknown Address",
+        "image": "https://raw.githubusercontent.com/your-username/website-real/main/images/3.jpg",
+        "map_link": "https://maps.google.com"
+    },
+    {
+        "name": "New Property",
+        "address": "Unknown Address",
+        "image": "https://raw.githubusercontent.com/your-username/website-real/main/images/5.jpg",
+        "map_link": "https://maps.google.com"
     }
 ]
-
