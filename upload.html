@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Property</title>
+</head>
+<body>
+    <h2>Upload Property Image</h2>
+    <form id="uploadForm">
+        <label>Property Name:</label>
+        <input type="text" id="propertyName" required><br>
+
+        <label>Address:</label>
+        <input type="text" id="propertyAddress" required><br>
+
+        <label>Select Image:</label>
+        <input type="file" id="propertyImage" accept="image/*" required><br>
+
+        <label>Secret Key:</label>
+        <input type="password" id="uploadKey" required><br>
+
+        <button type="submit">Upload</button>
+    </form>
+
+    <p id="status"></p>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", async function (event) {
+            event.preventDefault();
+
+            const formData = new FormData();
+            formData.append("propertyName", document.getElementById("propertyName").value);
+            formData.append("propertyAddress", document.getElementById("propertyAddress").value);
+            formData.append("propertyImage", document.getElementById("propertyImage").files[0]);
+            formData.append("key", document.getElementById("uploadKey").value);
+
+            const response = await fetch("/.netlify/functions/upload", {
+                method: "POST",
+                body: formData,
+            });
+
+            const result = await response.text();
+            document.getElementById("status").textContent = result;
+        });
+    </script>
+</body>
+</html>
