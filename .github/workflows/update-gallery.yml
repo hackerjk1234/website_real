@@ -15,6 +15,10 @@ jobs:
       - name: 🛎 Checkout Repository
         uses: actions/checkout@v3
 
+      - name: 📂 List Files in the Repo  # Add this to debug
+        run: |
+          ls -alh  # List all files and directories to confirm script is available
+
       - name: 🐍 Set up Python
         uses: actions/setup-python@v3
         with:
@@ -22,11 +26,11 @@ jobs:
 
       - name: 📥 Install Dependencies
         run: |
-          pip install requests  # Install requests if needed (change as necessary)
+          pip install requests  # Install requests if needed (you can add more dependencies if necessary)
 
       - name: 🔄 Run `update_properties.py`
         run: |
-          python update-properties.py  # Run the script
+          python ./update-properties.py  # Explicitly specify the path to the script
 
       - name: 📋 Check Status of `properties.json` Before Commit
         run: |
@@ -37,6 +41,5 @@ jobs:
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add properties.json
-          git status  # Check if properties.json is staged
           git commit -m "🤖 Auto-update properties.json"
           git push
