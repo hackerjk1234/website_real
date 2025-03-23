@@ -4,5 +4,29 @@
         "address": "123 Beverly Hills, LA",
         "image": "https://raw.githubusercontent.com/hackerjk1234/website_real/main/images/1.jpg",
         "map_link": "https://maps.app.goo.gl/QMxzpk23s1prTR"
+    },
+    {
+        "name": "Provident Welworth City",
+        "address": "Doddaballapur Main Rd, Yelahanka, Marasandra, Amanikere, Bisuvanahalli, Karnataka, Bangalore",
+        "image": "https://raw.githubusercontent.com/your-username/website-real/main/images/4.jpg",
+        "map_link": "https://maps.google.com/?q=Doddaballapur Main Rd, Yelahanka, Marasandra, Amanikere, Bisuvanahalli, Karnataka, Bangalore"
+    },
+    {
+        "name": "Luxury Villa",
+        "address": "123 Sunset Blvd, Thanjavur",
+        "image": "https://raw.githubusercontent.com/your-username/website-real/main/images/2.jpg",
+        "map_link": "https://maps.google.com/?q=123 Sunset Blvd, Thanjavur"
+    },
+    {
+        "name": "Beach House",
+        "address": "456 Ocean Drive, Thanjavur",
+        "image": "https://raw.githubusercontent.com/your-username/website-real/main/images/3.jpg",
+        "map_link": "https://maps.google.com/?q=456 Ocean Drive, Thanjavur"
+    },
+    {
+        "name": "Provident Park Square",
+        "address": "Judicial Layout, Kanakapura Rd, Judicial Layout 2nd Phase, Vakil Garden City, Bengaluru, Karnataka",
+        "image": "https://raw.githubusercontent.com/your-username/website-real/main/images/5.jpg",
+        "map_link": "https://maps.google.com/?q=Judicial Layout, Kanakapura Rd, Judicial Layout 2nd Phase, Vakil Garden City, Bengaluru, Karnataka"
     }
 ]
