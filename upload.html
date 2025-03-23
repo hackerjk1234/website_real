@@ -26,14 +26,21 @@
             try {
                 const response = await fetch("/.netlify/functions/upload", {
                     method: "POST",
-                    headers: { "x-upload-secret": "MySecureKey123" }, // Secret Key
+                    headers: {
+                        "x-upload-secret": "default-secret" // Make sure this key matches the one in the server
+                    },
                     body: formData
                 });
 
                 const result = await response.json();
-                alert(result.message || "Upload Failed");
+                if (response.ok) {
+                    alert(result.message || "Upload Successful");
+                } else {
+                    alert(result.error || "Upload Failed");
+                }
             } catch (error) {
-                alert("Error Uploading File");
+                console.error("Error during upload:", error);
+                alert("Error Uploading File: " + error.message);
             }
         });
     </script>
