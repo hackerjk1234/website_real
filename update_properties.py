@@ -4,7 +4,7 @@ import json
 # 🏡 GitHub repo details
 GITHUB_USERNAME = "hackerjk1234"  # Your GitHub username
 REPO_NAME = "website-real"  # Your repo name
-IMAGE_FOLDER = "images/"  # Image folder location
+IMAGE_FOLDER = "images/"  # Folder where the images are stored
 PROPERTIES_FILE = "properties.json"  # JSON file to update
 
 def update_properties():
