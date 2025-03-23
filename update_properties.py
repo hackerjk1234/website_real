@@ -15,11 +15,18 @@ def load_property_details():
         with open(PROPERTY_DETAILS_FILE, "r") as f:
             for line in f:
                 # Example line: "image1.jpg: Luxury Villa, 123 Sunset Blvd, Thanjavur"
-                parts = line.strip().split(":")
+                parts = line.strip().split(":", 1)
                 if len(parts) == 2:
                     image_name = parts[0].strip()
-                    name, address = map(str.strip, parts[1].split(","))
-                    property_details[image_name] = {"name": name, "address": address}
+                    # Now split the remaining part by the first comma (property name and address)
+                    name_and_address = parts[1].split(",", 1)
+                    if len(name_and_address) == 2:
+                        name = name_and_address[0].strip()  # The property name before the first comma
+                        address = name_and_address[1].strip()  # The address after the first comma
+                        property_details[image_name] = {"name": name, "address": address}
+                    else:
+                        # If the address does not have a comma (should not happen with valid data)
+                        print(f"Skipping invalid entry in {PROPERTY_DETAILS_FILE}: {line}")
     return property_details
 
 def update_properties():
