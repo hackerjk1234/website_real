@@ -7,47 +7,11 @@
 </head>
 <body>
     <h2>Upload Property Image</h2>
-    <form id="uploadForm">
-        <input type="text" id="propertyName" placeholder="Property Name" required><br><br>
-        <input type="text" id="propertyAddress" placeholder="Property Address" required><br><br>
-        <input type="file" id="imageInput" accept="image/*" required><br><br>
+    <form action="/upload" method="POST" enctype="multipart/form-data">
+        <input type="text" name="name" placeholder="Property Name" required><br><br>
+        <input type="text" name="address" placeholder="Property Address" required><br><br>
+        <input type="file" name="image" accept="image/*" required><br><br>
         <button type="submit">Upload</button>
     </form>
-
-    <script>
-        document.getElementById("uploadForm").addEventListener("submit", async function(event) {
-            event.preventDefault();
-
-            // Prepare form data to send
-            const formData = new FormData();
-            formData.append("name", document.getElementById("propertyName").value);
-            formData.append("address", document.getElementById("propertyAddress").value);
-            formData.append("image", document.getElementById("imageInput").files[0]);
-
-            try {
-                // Send POST request to the Netlify function
-                const response = await fetch("/.netlify/functions/upload", {
-                    method: "POST",
-                    headers: {
-                        "x-upload-secret": "akdfjLJ29fj2912o0i2j"  // Use the same secret key as on the server side
-                    },
-                    body: formData
-                });
-
-                // Parse the JSON response from the server
-                const result = await response.json();
-                
-                // Check if the upload was successful
-                if (response.ok) {
-                    alert(result.message || "Upload Successful");
-                } else {
-                    alert(result.error || "Upload Failed");
-                }
-            } catch (error) {
-                console.error("Error during upload:", error);
-                alert("Error Uploading File: " + error.message);
-            }
-        });
-    </script>
 </body>
 </html>
