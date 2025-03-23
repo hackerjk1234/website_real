@@ -1,65 +1,44 @@
-import os
 import json
 
-# 🏡 GitHub repo details
-GITHUB_USERNAME = "hackerjk1234"
-REPO_NAME = "website-real"  # Your repo name
-IMAGE_FOLDER = "images/"
-PROPERTIES_FILE = "properties.json"
+# File paths
+PROPERTY_DETAILS_FILE = "property_details.txt"
+OUTPUT_JSON_FILE = "properties.json"
+GITHUB_RAW_URL = "https://raw.githubusercontent.com/hackerjk1234/website_real/main/images/"
 
 def load_property_details():
-    """Load property details from property_details.txt"""
     properties = []
-    with open("property_details.txt", "r") as f:
+    with open(PROPERTY_DETAILS_FILE, "r", encoding="utf-8") as f:
         for line in f:
             line = line.strip()
-            if line:
-                # Split the line at the first colon (:)
-                image, details = line.split(":", 1)
-                
-                # Now split details into name and address by separating at the first comma
-                parts = details.split(",", 1)  # Split only at the first comma
-                if len(parts) == 2:
-                    name, address = map(str.strip, parts)
-                else:
-                    name = parts[0].strip()
-                    address = ""  # If no comma found, treat as a single field (possible bug)
+            if not line:
+                continue  # Skip empty lines
+            try:
+                image_filename, details = line.split(":", 1)
+                name, address = details.split(",", 1)
 
-                # Append the property data
-                properties.append({
-                    "name": name,
-                    "address": address,
-                    "image": f"https://raw.githubusercontent.com/{GITHUB_USERNAME}/{REPO_NAME}/main/{IMAGE_FOLDER}{image.strip()}",
-                    "map_link": f"https://maps.google.com/?q={address.replace(' ', '+')}"
-                })
+                # Construct the correct raw image URL
+                image_url = f"{GITHUB_RAW_URL}{image_filename.strip()}?raw=true"
+
+                property_data = {
+                    "name": name.strip(),
+                    "address": address.strip(),
+                    "image": image_url,
+                    "map_link": f"https://maps.google.com/?q={address.strip().replace(' ', '+')}"
+                }
+                properties.append(property_data)
+            except ValueError:
+                print(f"Skipping invalid line: {line}")  # Error handling for incorrect format
+
     return properties
 
 def update_properties():
-    """Automatically updates properties.json with new images"""
-    # Load existing JSON data if available
-    if os.path.exists(PROPERTIES_FILE):
-        with open(PROPERTIES_FILE, "r") as f:
-            properties = json.load(f)
-    else:
-        properties = []
-
-    # Load new property details
     new_properties = load_property_details()
 
-    # Extract existing image names to avoid duplicates
-    existing_images = {prop["image"].split("/")[-1] for prop in properties}
+    # Write to properties.json
+    with open(OUTPUT_JSON_FILE, "w", encoding="utf-8") as f:
+        json.dump(new_properties, f, indent=4)
 
-    # Check all new properties and add them if not already added
-    for prop in new_properties:
-        image_name = prop["image"].split("/")[-1]
-        if image_name not in existing_images:
-            properties.append(prop)
-
-    # Save updated data to properties.json
-    with open(PROPERTIES_FILE, "w") as f:
-        json.dump(properties, f, indent=4)
-
-    print("✅ properties.json updated successfully!")
+    print(f"Updated {OUTPUT_JSON_FILE} with {len(new_properties)} properties.")
 
 if __name__ == "__main__":
     update_properties()
