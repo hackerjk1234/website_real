@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "images/**"  # Trigger when a new image is added to the images folder
+      - "images/**"  # Trigger when a new image is added
 
 jobs:
   update-json:
@@ -15,26 +15,16 @@ jobs:
       - name: 🛎 Checkout Repository
         uses: actions/checkout@v3
 
-      - name: 📂 List Files in the Repo  # Add this to debug
-        run: |
-          ls -alh  # List all files and directories to confirm script is available
-
       - name: 🐍 Set up Python
         uses: actions/setup-python@v3
         with:
           python-version: 3.x
 
       - name: 📥 Install Dependencies
-        run: |
-          pip install requests  # Install requests if needed (you can add more dependencies if necessary)
+        run: pip install requests  # (No extra dependencies needed)
 
       - name: 🔄 Run `update_properties.py`
-        run: |
-          python ./update-properties.py  # Explicitly specify the path to the script
-
-      - name: 📋 Check Status of `properties.json` Before Commit
-        run: |
-          git status  # Ensure properties.json is updated before committing
+        run: python update_properties.py
 
       - name: 📤 Commit and Push Changes
         run: |
