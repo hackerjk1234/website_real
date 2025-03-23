@@ -2,15 +2,15 @@ import os
 import json
 
 # 🏡 GitHub repo details
-GITHUB_USERNAME = "hackerjk1234"  # Your GitHub username
+GITHUB_USERNAME = "your-username"
 REPO_NAME = "website-real"  # Your repo name
-IMAGE_FOLDER = "images/"  # Folder where the images are stored
-PROPERTIES_FILE = "properties.json"  # JSON file to update
+IMAGE_FOLDER = "images/"
+PROPERTIES_FILE = "properties.json"
 
 def update_properties():
-    """Automatically updates properties.json with new images."""
+    """Automatically updates properties.json with new images"""
     properties = []
-
+    
     # Load existing JSON data if available
     if os.path.exists(PROPERTIES_FILE):
         with open(PROPERTIES_FILE, "r") as f:
@@ -26,10 +26,10 @@ def update_properties():
             
             # Placeholder details (update later if needed)
             new_entry = {
-                "name": "New Property",  # Placeholder property name
-                "address": "Unknown Address",  # Placeholder address
-                "image": image_url,  # Image URL
-                "map_link": "https://maps.google.com"  # Google Maps link (to be updated)
+                "name": "New Property",
+                "address": "Unknown Address",
+                "image": image_url,
+                "map_link": "https://maps.google.com"
             }
             properties.append(new_entry)
 
