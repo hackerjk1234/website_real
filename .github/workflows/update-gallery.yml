@@ -5,7 +5,7 @@ on:
     branches:
       - main
     paths:
-      - "images/**"  # Trigger when a new image is added
+      - "images/**"  # Trigger when a new image is added to the images folder
 
 jobs:
   update-json:
@@ -21,15 +21,22 @@ jobs:
           python-version: 3.x
 
       - name: 📥 Install Dependencies
-        run: pip install requests  # (No extra dependencies needed)
+        run: |
+          pip install requests  # Install requests if needed (change as necessary)
 
       - name: 🔄 Run `update_properties.py`
-        run: python update_properties.py
+        run: |
+          python update-properties.py  # Run the script
+
+      - name: 📋 Check Status of `properties.json` Before Commit
+        run: |
+          git status  # Ensure properties.json is updated before committing
 
       - name: 📤 Commit and Push Changes
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
           git add properties.json
+          git status  # Check if properties.json is staged
           git commit -m "🤖 Auto-update properties.json"
           git push
