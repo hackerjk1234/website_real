@@ -1,5 +1,4 @@
-1.jpg: Plot, 327 Sunset Klvd, Thanjavur
 2.jpg: Luxury Villa, 123 Sunset Blvd, Thanjavur
 3.jpg: Beach House, 456 Ocean Drive, Thanjavur
-4.jpg: Provident Welworth City, Doddaballapur Main Rd, Yelahanka, Bangalore
-5.jpg: Provident Park Square, Judicial Layout, Kanakapura Rd, Bangalore
+4.jpg: Provident Welworth City, Doddaballapur Main Rd, Yelahanka, Marasandra, Amanikere, Bisuvanahalli, Karnataka, Bangalore
+5.jpg: Provident Park Square, Judicial Layout, Kanakapura Rd, Judicial Layout 2nd Phase, Vakil Garden City, Bengaluru, Karnataka
