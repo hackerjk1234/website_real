@@ -2,17 +2,21 @@ const fs = require("fs");
 const path = require("path");
 const formidable = require("formidable");
 
-// Load secret key from environment variables
-const SECRET_KEY = process.env.UPLOAD_SECRET || "default-secret";
+// Access the secret key from the environment variable
+const SECRET_KEY = process.env.UPLOAD_SECRET || "default-secret";  // Default in case the environment variable is not set
 
 exports.handler = async (event) => {
     if (event.httpMethod !== "POST") {
         return { statusCode: 405, body: JSON.stringify({ error: "Method Not Allowed" }) };
     }
 
+    // Log secret key for debugging purposes
+    console.log("Secret Key from Environment:", SECRET_KEY);  // This will log the environment variable's value
+    
     // Validate Secret Key
     const headers = event.headers || {};
     if (headers["x-upload-secret"] !== SECRET_KEY) {
+        console.log("Received Secret Key:", headers["x-upload-secret"]);
         return { statusCode: 403, body: JSON.stringify({ error: "Invalid Secret Key" }) };
     }
 
@@ -20,9 +24,8 @@ exports.handler = async (event) => {
     const form = new formidable.IncomingForm({ maxFileSize: 2 * 1024 * 1024 }); // 2MB limit
 
     return new Promise((resolve, reject) => {
-        form.parse(event.body, (err, fields, files) => {
+        form.parse(event, async (err, fields, files) => {
             if (err) {
-                console.error("Form parse error:", err);
                 return resolve({ statusCode: 400, body: JSON.stringify({ error: "File Upload Error" }) });
             }
 
