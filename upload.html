@@ -18,21 +18,26 @@
         document.getElementById("uploadForm").addEventListener("submit", async function(event) {
             event.preventDefault();
 
+            // Prepare form data to send
             const formData = new FormData();
             formData.append("name", document.getElementById("propertyName").value);
             formData.append("address", document.getElementById("propertyAddress").value);
             formData.append("image", document.getElementById("imageInput").files[0]);
 
             try {
+                // Send POST request to the Netlify function
                 const response = await fetch("/.netlify/functions/upload", {
                     method: "POST",
                     headers: {
-                        "x-upload-secret": "default-secret" // Make sure this key matches the one in the server
+                        "x-upload-secret": "akdfjLJ29fj2912o0i2j"  // Use the same secret key as on the server side
                     },
                     body: formData
                 });
 
+                // Parse the JSON response from the server
                 const result = await response.json();
+                
+                // Check if the upload was successful
                 if (response.ok) {
                     alert(result.message || "Upload Successful");
                 } else {
